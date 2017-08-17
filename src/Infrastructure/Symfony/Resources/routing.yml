@@ -1,0 +1,24 @@
+user_sign_up:
+    path:     /users
+    defaults: { _controller: 'UserBundle:User:register' }
+    methods:  [POST]
+
+user_login:
+    path:     /login
+    defaults: { _controller: 'UserBundle:User:login' }
+    methods:  [GET]
+
+user_get:
+    path:     /users/{id}
+    defaults: { _controller: 'UserBundle:User:get' }
+    methods:  [GET]
+
+user_edit:
+    path:     /users/{id}
+    defaults: { _controller: 'UserBundle:User:edit' }
+    methods:  [PUT]
+
+user_cancel:
+    path:     /users/{id}
+    defaults: { _controller: 'UserBundle:User:cancel' }
+    methods:  [DELETE]

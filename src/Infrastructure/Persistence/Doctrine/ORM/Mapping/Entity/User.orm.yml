@@ -1,0 +1,14 @@
+Domain\Model\Entity\User:
+    type: entity
+    table: users
+    repositoryClass: Infrastructure\Persistence\Doctrine\ORM\Repository\DoctrineORMUserRepository
+    embedded:
+      id:
+        class:  Domain\Model\ValueObject\Id
+        columnPrefix: false
+      email:
+        class:  Domain\Model\ValueObject\Email
+        columnPrefix: false
+      password:
+        class:  Domain\Model\ValueObject\HashedPassword
+        columnPrefix: false

@@ -14,5 +14,6 @@
 /vendor/
 /web/bundles/
 /docker/logs/*
-/docker/data/*
+/docker/.data/db/*
 .idea/
+composer.lock

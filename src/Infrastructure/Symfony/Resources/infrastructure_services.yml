@@ -1,0 +1,20 @@
+services:
+    infrastructure.cors_listener:
+        class: Infrastructure\Symfony\EventListener\CorsListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+    infrastructure.leos_jwt_created_listener:
+        class: Infrastructure\Symfony\EventListener\JWTCreatedListener
+        arguments: [ '@request_stack' ]
+        tags:
+          - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
+    infrastructure.bcrypt_hashing:
+        class: Infrastructure\Service\BcryptHashing
+    infrastructure.user_provider:
+            class: Infrastructure\Symfony\Security\Provider\UserProvider
+            arguments: ["@infrastructure.user_repository", "@cb.infrastructure.jwtoken"]
+    infrastructure.user_repository:
+        class: Infrastructure\Persistence\Doctrine\ORM\Repository\DoctrineORMUserRepository
+        factory: ["@doctrine", getRepository]
+        factory_method: getRepository
+        arguments: ['Domain\Model\Entity\User']

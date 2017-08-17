@@ -1,0 +1,24 @@
+services:
+    domain.authentication_middleware:
+        class: Domain\Bus\Command\User\AuthenticationMiddleware
+        arguments: ["@infrastructure.user_repository"]
+
+    domain.sign_up_command_handler:
+        class: Domain\Bus\Command\User\SignUpCommandHandler
+        arguments: ["@infrastructure.bcrypt_hashing", "@infrastructure.user_repository", "@cb.infrastructure.event_provider"]
+
+    domain.login_command_handler:
+        class: Domain\Bus\Command\User\LoginCommandHandler
+        arguments: ["@infrastructure.user_repository", "@cb.infrastructure.jwtoken"]
+
+    domain.get_command_handler:
+        class: Domain\Bus\Command\User\GetCommandHandler
+        arguments: ["@infrastructure.user_repository", "@cb.infrastructure.user_storage"]
+
+    domain.edit_command_handler:
+        class: Domain\Bus\Command\User\EditCommandHandler
+        arguments: ["@infrastructure.bcrypt_hashing", "@infrastructure.user_repository", "@cb.infrastructure.event_provider"]
+
+    domain.cancel_command_handler:
+        class: Domain\Bus\Command\User\CancelCommandHandler
+        arguments: ["@infrastructure.user_repository", "@cb.infrastructure.event_provider"]

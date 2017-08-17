@@ -1,0 +1,37 @@
+version: '2'
+
+services:
+    application:
+        image: tianon/true
+        volumes:
+          - ./../:/var/www/ddd-crud
+          - ./logs/symfony:/var/www/ddd-crud/var/logs
+    db:
+        image: mysql
+        volumes:
+            - "./.data/db:/var/lib/mysql"
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: symfony
+            MYSQL_USER: symfony
+            MYSQL_PASSWORD: symfony
+        ports:
+          - "3306:3306"
+    php:
+        build: ./php7-fpm
+        ports:
+            - 9000:9000
+        volumes_from:
+          - application
+        links:
+          - db
+    nginx:
+        build: ./nginx
+        ports:
+            - 9090:80
+        links:
+          - php
+        volumes_from:
+            - php
+        volumes:
+            - ./logs/nginx/:/var/log/nginx

@@ -1,0 +1,26 @@
+services:
+    application.sign_up_user:
+        class: Application\Service\SignUpUser
+        parent: cb.application.abstract_application_service
+
+    application.login_user:
+        class: Application\Service\LoginUser
+        parent: cb.application.abstract_application_service
+        arguments:
+            - ["@domain.authentication_middleware"]
+
+    application.get_user:
+        class: Application\Service\GetUser
+        parent: cb.application.abstract_application_service
+
+    application.edit_user:
+        class: Application\Service\EditUser
+        parent: cb.application.abstract_application_service
+        arguments:
+            - ["@domain.authentication_middleware"]
+
+    application.cancel_user:
+        class: Application\Service\CancelUser
+        parent: cb.application.abstract_application_service
+        arguments:
+            - ["@domain.authentication_middleware"]

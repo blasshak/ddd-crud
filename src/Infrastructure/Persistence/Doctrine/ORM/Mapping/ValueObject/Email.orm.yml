@@ -1,0 +1,7 @@
+Domain\Model\ValueObject\Email:
+  type: embeddable
+  fields:
+    value:
+      type: string
+      length: 50
+      column: email

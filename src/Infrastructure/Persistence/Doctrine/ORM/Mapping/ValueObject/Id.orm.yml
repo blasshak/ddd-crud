@@ -1,0 +1,7 @@
+Domain\Model\ValueObject\Id:
+  type: embeddable
+  id:
+    value:
+      type: string
+      length: 40
+      column: id
